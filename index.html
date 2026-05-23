@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Off By One Studio</title>
+<meta name="description" content="Off By One Studio is an independent game development studio. Currently building Off By One, a paintball dungeon crawler for iOS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-soft: #5a5a57;
+    --paper: #f6f4ef;
+    --paper-warm: #efece4;
+    --line: #d8d4c8;
+    --accent: #d4452f;
+    --accent-2: #2f6fd4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Fraunces', Georgia, serif;
+    font-optical-sizing: auto;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* ---- header ---- */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 2.4rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mark {
+    font-family: 'Spline Sans Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .mark .dot { color: var(--accent); }
+
+  nav a {
+    font-family: 'Spline Sans Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    margin-left: 1.6rem;
+    transition: color 0.2s ease;
+  }
+  nav a:hover { color: var(--accent); }
+
+  /* ---- hero ---- */
+  .hero {
+    padding: 7rem 0 5.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero .eyebrow {
+    font-family: 'Spline Sans Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: rise 0.7s ease forwards;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.8rem, 7vw, 5.2rem);
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    max-width: 14ch;
+    opacity: 0;
+    animation: rise 0.7s ease 0.1s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero p.lede {
+    margin-top: 2rem;
+    font-size: 1.18rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    opacity: 0;
+    animation: rise 0.7s ease 0.22s forwards;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- section scaffold ---- */
+  section { padding: 5.5rem 0; border-bottom: 1px solid var(--line); }
+
+  .sec-label {
+    font-family: 'Spline Sans Mono', monospace;
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2.2rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 3.5rem;
+  }
+
+  .grid h2 {
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .grid .body p {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+  }
+  .grid .body p + p { margin-top: 1.2rem; }
+
+  /* ---- project card ---- */
+  .project {
+    margin-top: 2.6rem;
+    background: var(--paper-warm);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 2.6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project::before {
+    content: "";
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0.07;
+  }
+  .project::after {
+    content: "";
+    position: absolute;
+    bottom: -55px; right: 70px;
+    width: 110px; height: 110px;
+    background: var(--accent-2);
+    border-radius: 50%;
+    opacity: 0.07;
+  }
+
+  .project .ptitle {
+    font-size: 1.9rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .project .ptitle .dot { color: var(--accent); }
+
+  .project .tag {
+    display: inline-block;
+    font-family: 'Spline Sans Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    padding: 0.3rem 0.8rem;
+    margin-top: 0.9rem;
+  }
+
+  .project p {
+    margin-top: 1.4rem;
+    font-size: 1.08rem;
+    color: var(--ink-soft);
+    max-width: 54ch;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ---- contact ---- */
+  .contact { text-align: left; }
+  .contact h2 {
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+  }
+  .contact p { color: var(--ink-soft); font-size: 1.1rem; margin-bottom: 1.6rem; }
+
+  .contact a.email {
+    font-family: 'Spline Sans Mono', monospace;
+    font-size: clamp(1.05rem, 2.4vw, 1.5rem);
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 2px;
+    transition: color 0.2s ease;
+  }
+  .contact a.email:hover { color: var(--accent); }
+
+  /* ---- footer ---- */
+  footer {
+    padding: 2.6rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  footer .mark { color: var(--ink); }
+  footer .fine {
+    font-family: 'Spline Sans Mono', monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 720px) {
+    .wrap { padding: 0 1.4rem; }
+    .grid { grid-template-columns: 1fr; gap: 1.4rem; }
+    .hero { padding: 4.5rem 0 4rem; }
+    nav a:first-child { margin-left: 0; }
+    .project { padding: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="wrap">
+
+    <header>
+      <span class="mark">Off By One<span class="dot">.</span> Studio</span>
+      <nav>
+        <a href="#studio">Studio</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <p class="eyebrow">Independent Game Development</p>
+      <h1>We build small games with <em>one strange idea</em> at their core.</h1>
+      <p class="lede">Off By One Studio is an independent studio crafting original games for iOS — designed and built with care, one project at a time.</p>
+    </div>
+
+    <section id="studio">
+      <p class="sec-label">01 — The Studio</p>
+      <div class="grid">
+        <h2>A studio of one, focused on the details.</h2>
+        <div class="body">
+          <p>Off By One Studio is an independent game development studio. We make games that take a single, distinctive mechanic and follow it as far as it will go.</p>
+          <p>Every project is built deliberately — design, code, and craft handled in-house, with the patience that small games deserve and the polish that makes them worth playing.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <p class="sec-label">02 — Current Work</p>
+      <div class="grid">
+        <h2>What we're building now.</h2>
+        <div class="body">
+          <p>Our focus is a single game in active development for iOS.</p>
+          <div class="project">
+            <div class="ptitle">Off By One<span class="dot">.</span></div>
+            <span class="tag">In Development &middot; iOS</span>
+            <p>A first-person paintball dungeon crawler. The world begins invisible — walls, doorways, and landmarks appear only where your paint lands. Painting isn't decoration; it's how you see, navigate, and find your way out. Explore freely at your own pace, light up the dark, and discover the route to the exit.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <p class="sec-label">03 — Get in Touch</p>
+      <h2>Questions, press, or hello.</h2>
+      <p>We're happy to hear from players, press, and fellow developers.</p>
+      <a class="email" href="mailto:info@offbyone.studio">info@offbyone.studio</a>
+    </section>
+
+    <footer>
+      <span class="mark">Off By One<span class="dot">.</span> Studio</span>
+      <span class="fine">&copy; 2026 Off By One Studio &middot; offbyone.studio</span>
+    </footer>
+
+  </div>
+
+</body>
+</html>
