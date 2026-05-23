@@ -1,3 +1,3 @@
 # offbyone.studio
 
-hosted @ netifly
+hosted @ netlify
